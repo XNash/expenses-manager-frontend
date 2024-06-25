@@ -6,6 +6,8 @@ import EditExpense from "@/views/EditExpense.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import SendExpenseReport from "@/views/SendExpenseReport.vue";
+import PasswordReset from "@/views/PasswordReset.vue";
+import UserProfile from "@/views/UserProfile.vue";
 
 const routes = [
     {
@@ -43,6 +45,17 @@ const routes = [
         path: '/send-report',
         name: 'SendExpenseReport',
         component: SendExpenseReport
+    },
+    {
+        path: '/reset-password',
+        name: 'PasswordReset',
+        component: PasswordReset
+    },
+    {
+        path: '/profile',
+        name: 'UserProfile',
+        component: UserProfile,
+        meta: { requiresAuth: true }
     }
 ]
 

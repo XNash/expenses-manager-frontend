@@ -23,9 +23,11 @@ export default {
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        router.push("List");
+        this.$root.$emit('user-logged-in', response.data.user);
+
+        router.push("/");
       } catch (error) {
-        alert("Identifiants invalides");
+        alert("Invalid credentials");
       }
     }
   }
@@ -33,19 +35,45 @@ export default {
 </script>
 
 <template>
-  <div class="card">
-    <div class="card-body">
-      <h1>Log in to an account to access your expenses data</h1>
-      <br><br><br>
-      <form @submit.prevent="login">
-        <input v-model="loginCredentials.email" class="input-group-text form-check-inline mb-3" placeholder="Enter your email here" maxlength="100" type="email" required/>
-        <input v-model="loginCredentials.password" class="input-group-text form-check-inline mb-3" placeholder="Enter your password here" minlength="8" maxlength="100" type="password" required/>
-        <button type="submit" class="btn btn-success">Login</button><br>
-        <router-link to="Register">register</router-link>
-      </form>
+  <br><br>
+  <div class="cont">
+    <h1>Log in to an account <br>to access your expenses data</h1>
+    <div class="card ctr" style="margin-left: 5em;">
+      <div class="card-body">
+        <br>
+        <form @submit.prevent="login">
+          <input v-model="loginCredentials.email" class="input-group-text form-check-inline mb-3" placeholder="Enter your email here" maxlength="100" type="email" required/>
+          <input v-model="loginCredentials.password" class="input-group-text form-check-inline mb-3" placeholder="Enter your password here/" minlength="8" maxlength="100" type="password" required/><br>
+          <button type="submit" class="btn btn-success">Login</button><br><br>
+          <router-link to="Register">Create an account</router-link>
+          <router-link to="/reset-password" style="margin-left: 10px;">Forgot your password?</router-link><br><br>
+
+        </form>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctr {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  margin: auto;
+}
+
+button {
+  position: absolute;
+  margin-left: 7em;
+}
 </style>

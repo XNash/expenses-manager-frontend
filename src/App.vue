@@ -35,6 +35,17 @@ export default {
         console.error('Token invalid:', error);
         this.logout();
       }
+    },
+    async login(credentials) {
+      try {
+        const response = await axios.post('http://127.0.0.1:3000/login', credentials);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('currentUser', JSON.stringify(response.data.user));
+        this.setCurrentUser();
+      } catch (error) {
+        console.error('Login failed:', error);
+        throw error;
+      }
     }
   },
   async beforeMount() {
@@ -56,17 +67,17 @@ export default {
         <router-link to="/list" class="nav-link col"
                      style="color: white; width: 20px; margin-left: 10px; border: #0a53be 1px solid;">Expenses
         </router-link>
+
       </div>
     </div>
     <div class="col-2">
       <div class="card" style="height: 50px">
         <div class="card-body p-1 row">
-          <div class="col-2">
-            <button @click="logout" class="btn-primary" style="margin-top: 5px;">🔚</button>
+          <div class="col-8 p-2" style="margin-left: 5px; text-align: center;">
+            <router-link to="/profile" class="nav-link" style="font-weight: bold; font-size: 18px">My Profile</router-link>
           </div>
-          <div v-if="currentUser" class="col-10">
-            <h6>{{ currentUser.name }}</h6>
-            <p style="margin-top: -10px;">{{ currentUser.email }}</p>
+          <div class="col-2">
+            <button @click="logout" class="btn-primary" style="margin-top: 5px;"><img src="./assets/log-out.png" alt="logout image" height="20"></button>
           </div>
         </div>
       </div>

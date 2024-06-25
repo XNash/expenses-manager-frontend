@@ -3,6 +3,11 @@ import router from "@/routes/index.js";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      currentUser: {}
+    }
+  },
   methods: {
 
     setCurrentUser() {
@@ -25,10 +30,15 @@ export default {
 
 <template>
   <div class="container">
-    <h1>Home page</h1>
+    <h1>Welcome, {{currentUser.name}}!</h1>
+    <br><br>
+    <h3>Keep your expenses under control with Nasshu's Expense manager!</h3><br>
+    <router-link to="List" class="btn btn-primary">Get started</router-link>
   </div>
 </template>
 
 <style scoped>
-
+  h1 {
+    margin: auto;
+  }
 </style>
